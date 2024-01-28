@@ -21,6 +21,7 @@ from dashboard.views import dashboard,dashboard_summary_of_assets
 import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', dashboard, name='dashboard'),
     path('', asset_register,name="asset_register"),
     path('data_entry/',data_entry,name="data_entry"),
     path('modify_database/',modify_database,name="modify_database"),
@@ -50,7 +51,5 @@ urlpatterns = [
     path('frc_dep/', frc_dep, name='frc_dep'),
     path('frc_system/', frc_system, name='frc_system'),
     path('frc_data_entry/', frc_data_entry, name='frc_data_entry'),
-    path('dashboard/', dashboard, name='dashboard'),
+    
 ]
-
-#hello bro

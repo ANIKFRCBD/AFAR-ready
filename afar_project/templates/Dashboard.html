@@ -58,6 +58,11 @@
 
     <div class='left'>
         <div>
+            <a href="{% url 'dashboard' %}">
+                <button type="button" class="btn btn-primary btn-block">Dashboard</button>
+            </a>
+        </div>
+        <div>
             <a href="{% url 'frc_asset_register' %}">
                 <button type="button" class="btn btn-primary btn-block">Asset Register</button>
             </a>
@@ -78,17 +83,12 @@
             </a>
         </div>
         <div>
-            <form method="post" action="{% url 'download_csv_frc_asset' %}" id="download_csv_frc_asset">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-success ml-2" value="Download as Excel" />
-            </form>
+            <a href="{% url 'frc_system' %}">
+                <button type="button" class="btn btn-primary btn-block">File Upload</button>
+            </a>
         </div>
-        <div>
-            <form method="post" action="{% url 'delete_rows_asset_register' %}" id="delete_rows_asset_register">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-danger ml-2" value="Delete Data" />
-            </form>
-        </div>
+        
+
     </div>
 
     <br><br><br>

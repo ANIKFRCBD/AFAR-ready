@@ -30,6 +30,11 @@
     {% include 'header.html' %}
     <div class='left'>
       <div>
+        <a href="{% url 'dashboard' %}">
+          <button type="submit" class="btn btn-primary btn-block">Dash Board</button>
+        </a>
+      </div>
+      <div>
         <a href="{% url 'frc_asset_register' %}">
           <button type="submit" class="btn btn-primary btn-block">Asset Register</button>
         </a>
@@ -50,10 +55,11 @@
         </a>
       </div>
       <div>
-        <a href="{% url 'dashboard' %}">
-          <button type="submit" class="btn btn-primary btn-block">Dash Board</button>
+        <a href="{% url 'frc_system' %}">
+            <button type="button" class="btn btn-primary btn-block">File Upload</button>
         </a>
-      </div>
+    </div>
+      
     </div>
     <br><br><br>
 
