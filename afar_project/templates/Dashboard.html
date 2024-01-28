@@ -39,6 +39,7 @@
             text-align: center;
             font-size: medium;
             text-decoration: double;
+            margin-top: 0cm ;
         }
         .table_summary{
             padding: .5cm;
@@ -50,6 +51,10 @@
             font-style: inherit;
             row-gap: 1cm;
             text-decoration: solid;
+        }
+        .org_name{
+            text-align: center;
+            align-content: center;
         }
     </style>
 </head>
@@ -90,10 +95,23 @@
         
 
     </div>
-
     <br><br><br>
+    <div class = "org_name"><h1 style="width: .5 cm; font-weight: 800 ;"> Financial Reporting Council</h1>
+    <p><p>Parjatan Bhaban (8th floor), Plot: E-5 C/1<br>
 
-    <div class="header"> <p style="font-size: 1cm;"><b>Summary of Assets (latest)</b></p></div>
+        West Agargaon, Sher-e-Bangla Nagar Administrative Area<br>
+        
+        Dhaka-1207, Bangladesh<br>
+        
+        Email: ed.ss@frc.gov.bd<br>
+        
+        Office: +88 02 41024674<br>
+        
+        Website: frc.gov.bd</p></p>
+    </div>
+    <br>
+    <div class="header"> <p style="font-size: .5cm;"><b>Summary of Assets (latest)</b></p>
+    </div>
     <div class="table_summary">
         {% if table %}
             <table>
@@ -103,7 +121,8 @@
             <p>No data available.</p>
         {% endif %}
     </div>
-    <div class="header"> <p style="font-size: 1cm;"><b>Year-wise distribution</b></p></div>
+    <br>
+    <div class="header"> <p style="font-size: .5cm;"><b>Year-wise distribution</b></p></div>
     <div class="table_summary">
         {% if yearly %}
             <table>
