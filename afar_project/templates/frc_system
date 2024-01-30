@@ -70,7 +70,7 @@
           <form id="file_upload_frc" action="{% url 'frc_system' %}" method="post" enctype="multipart/form-data">
               {% csrf_token %}
               <input type="file" name="file" accept=".xlsx" />
-              <button type="submit" class="btn btn-success">Upload CSV File</button>
+              <button type="submit" class="btn btn-success">Upload excel File</button>
             </form>
       </div>
       

@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path,include
 from afar_project.views import asset_register,data_entry,modify_database,success,genSchedule,depriciation,list_test,register,asset_info,current_asset_info,download_predefined_csv,file_upload,asset_schedule,data_entry_pre,file_upload_pre,download_csv,delete_extra_columns,download_csv_dep,download_csv_schedule,frc_system,frc_asset_register,frc_asset_schedule,frc_dep,frc_data_entry,download_csv_frc_asset,delete_rows_asset_register,download_csv_frc_dep,download_csv_frc_asset_schedule
 from dashboard.views import dashboard,dashboard_summary_of_assets
+from users.views import opening,signin,signup,SignUpModel
 import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', dashboard, name='dashboard'),
-    path('', asset_register,name="asset_register"),
+    path('',opening,name='opening'),
+    path('dashboard', dashboard, name='dashboard'),
+    path('asset_register', asset_register,name="asset_register"),
+    path('signin',signin,name='signin'),
+    path('signup',signup,name='signup'),
     path('data_entry/',data_entry,name="data_entry"),
     path('modify_database/',modify_database,name="modify_database"),
     path('success/',success),
