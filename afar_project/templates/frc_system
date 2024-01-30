@@ -50,6 +50,16 @@
         </a>
       </div>
       <div>
+        <a href="{% url 'current_asset_info' %}">
+          <button type="submit" class="btn btn-primary btn-block">Current Asset Info</button>
+        </a>
+      </div>
+      <div>
+        <a href="{% url 'asset_info' %}">
+          <button type="submit" class="btn btn-primary btn-block">Input Asset Info</button>
+        </a>
+      </div>
+      <div>
         <a href="{% url 'frc_data_entry' %}">
           <button type="submit" class="btn btn-primary btn-block">Data Entry</button>
         </a>

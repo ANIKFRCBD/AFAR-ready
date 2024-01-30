@@ -57,6 +57,16 @@
         </a>
       </div>
       <div>
+        <a href="{% url 'current_asset_info' %}">
+          <button type="submit" class="btn btn-primary btn-block">Current Asset Info</button>
+        </a>
+      </div>
+      <div>
+        <a href="{% url 'asset_info' %}">
+          <button type="submit" class="btn btn-primary btn-block">Input Asset Info</button>
+        </a>
+      </div>
+      <div>
         <a href="{% url 'frc_data_entry' %}">
           <button type="submit" class="btn btn-primary btn-block">Data Entry</button>
         </a>
@@ -119,11 +129,6 @@
             <div class="col-md-6">
               <label for="price">Price:</label>
               <input type="number" id="price" name="price" step="0.00001" class="form-control" required>
-            </div>
-      
-            <div class="col-md-6">
-              <label for="sold_quantity">Sold Quantity:</label>
-              <input type="text" id="sold_quantity" name="sold_quantity" class="form-control" required>
             </div>
           </div>
       

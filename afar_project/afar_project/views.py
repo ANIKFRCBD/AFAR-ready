@@ -1708,7 +1708,7 @@ def frc_asset_schedule(request):
     len_csv = len(df)
     len_csv = len_csv - 1
     # Initialize an empty list to store the rows
-    page_header = ['Economic Code','Particulars','Balance ( Pre MAB assets)','Opening Balance','Purchases (New)','Total','Current Balance','Rate ( Pre MAB Assets)','Rate ( Post MAB Assets)','Accumulated Depreciation','Depreciation ( Pre MAB)','Depreciation (Post MAB)','Depreciation ( New Purchases)','Depreciation Charges','Total Accumulated Depreciation','WDV','Status']
+    page_header = ['Economic Code','Particulars','Opening Balance','Purchases (New)','Sub Total','Cost of asset sold','Current Balance','Rate ( Post MAB Assets)','Depreciation (Post MAB)','Depreciation ( New Purchases)','Depreciation Charges','Total Accumulated Depreciation','WDV','Status']
     rows = []
     if len_csv > 0:
     # Read the CSV files into dataframes, skipping the header row
@@ -1716,7 +1716,7 @@ def frc_asset_schedule(request):
         df_asset_register = pd.read_excel('csv_path/sample/asset_registerxxx.xlsx', header=None, skiprows=1)
 
         # Initialize an empty list to store the rows
-        page_header = ['Economic Code','Particulars','Balance ( Pre MAB assets)','Opening Balance','Purchases (New)','Cost of asset sold','Total','Current Balance','Rate ( Pre MAB Assets)','Rate ( Post MAB Assets)','Accumulated Depreciation','Depreciation ( Pre MAB)','Depreciation (Post MAB)','Depreciation ( New Purchases)','Depreciation Charges','Total Accumulated Depreciation','WDV','Status']
+        page_header = ['Economic Code','Particulars','Opening Balance','Purchases (New)','Sub Total','Cost of asset sold','Current Balance','Rate ( Post MAB Assets)','Accumulated Depreciation (Opening Balance)','Depreciation ( New Purchases)','Depreciation Charges','Total Accumulated Depreciation','WDV']
 
         result_rows = []
         result_rows.append(page_header)
@@ -1754,6 +1754,35 @@ def frc_asset_schedule(request):
                         sum_seventh_element_post = sum_seventh_element_post + float(taka)
                     
                     costs_of_asset_sold = costs_of_asset_sold + row_reg.iloc[15]
+
+            
+
+            dft_dep = pd.read_excel('csv_path/sample/modified_asset_register.xlsx', header=None, skiprows=1)
+
+            for index_reg, row_reg in df_asset_register.iterrows():
+                taka = extract_numbers(str(row_reg.iloc[13]))
+                asset_code_reg = row_reg.iloc[7]  # Fourth element of df_asset_register row
+                pre_post_reg = row_reg.iloc[3]  # Sixth element of df_asset_register row
+                pre_rate = pre_rate_percentage = post_rate = post_rate_percentage = depriciation_pre = depriciation_post = 0
+
+                # Check if the conditions are met
+                
+                if asset_code_info == asset_code_reg:
+                    present = 1
+                    if pre_post_reg == 'Pre':
+                        # Calculate the sum of the 8th element of df_asset_info rows (7th in 0-based indexing)
+                        sum_seventh_element_pre = sum_seventh_element_pre + float(taka)
+                    elif pre_post_reg == 'New':
+                        # Calculate the sum of the 8th element of df_asset_info rows (7th in 0-based indexing)
+                        sum_seventh_element_new = sum_seventh_element_new + float(taka)
+                    else :
+                        sum_seventh_element_post = sum_seventh_element_post + float(taka)
+                    
+                    costs_of_asset_sold = costs_of_asset_sold + row_reg.iloc[15]
+
+
+            
+            
             if(row_info.iloc[4] > 0):
                 post_rate = 1 / float(row_info.iloc[4])
                 depriciation_post = round(post_rate * sum_seventh_element_post,2)
@@ -1771,7 +1800,7 @@ def frc_asset_schedule(request):
                 WDV = total - depriciation_charges
                 WDV = round(total - depriciation_charges, 2)
                 current_balance = total - costs_of_asset_sold
-                new_row = [row_info.iloc[2], row_info.iloc[0], sum_seventh_element_pre, sum_seventh_element_post,sum_seventh_element_new,costs_of_asset_sold,total,current_balance,pre_rate_percentage, post_rate_percentage,0,depriciation_pre,depriciation_post,0,depriciation_charges,depriciation_charges,WDV,]
+                new_row = [row_info.iloc[2], row_info.iloc[0],sum_seventh_element_post,sum_seventh_element_new,total,costs_of_asset_sold,current_balance, post_rate_percentage,depriciation_post,0,depriciation_charges,depriciation_charges,WDV]
                 result_rows.append(new_row)
 
         # Convert the list of rows into a DataFrame
@@ -1827,7 +1856,7 @@ def frc_dep(request):
         if current_date.month > 6:
             financial_years_to_add = [f"{year}-{year+1}" for year in range(smallest_year, current_year + 1)]
         else:
-            financial_years_to_add = [f"{year-1}-{year}" for year in range(smallest_year, current_year)]
+            financial_years_to_add = [f"{year-1}-{year}" for year in range(smallest_year, current_year + 1)]
 
         # Determine additional columns needed and set their values to 0
         for year in financial_years_to_add:
@@ -1847,7 +1876,7 @@ def frc_dep(request):
         #         else:
         #             continue
             
-        for index, row in df.iloc[1:].iterrows():
+        for index, row in df.iloc[0:].iterrows():
             for column_name in df.columns[20:]:
                 # Inner loop for columns
                 if(df.iloc[index, 0] != column_name):
@@ -1858,7 +1887,7 @@ def frc_dep(request):
         for index, row in df.iloc[0:].iterrows():
             cn = 0
             e_life = float(df.iloc[index, 16]) if df.iloc[index, 16] != '' else 1
-            for column_name in df.columns[20:]:
+            for column_name in df.columns[20:-1]:
                 if(e_life <= cn):
                     df.at[index, column_name] = 0
                 else:
@@ -1867,7 +1896,12 @@ def frc_dep(request):
     # Convert DataFrame to HTML
     numeric_cols = df.select_dtypes(include='number').columns  # Select numeric columns
     df[numeric_cols] = df[numeric_cols].applymap(lambda x: f'{x:.2f}' if not pd.isnull(x) else '')  # Format 
-    
+    # Convert relevant columns to numeric
+    df.iloc[:, -6:-1] = df.iloc[:, -6:-1].apply(pd.to_numeric)
+
+    # Calculate the sum of the last five columns excluding the last one
+    df['Total Accumulated Depreciation for sold items'] = df.iloc[:, -6:-1].sum(axis=1)
+
     excel_html = df.to_html(index=False)
 
     # Split the HTML table into headers and rows
@@ -1909,7 +1943,7 @@ def frc_data_entry(request):
         name_of_item = request.POST.get('name_of_item')
         quantity = float(request.POST.get('quantity') or 0)
         price = float(request.POST.get('price'))
-        sold_quantity = float(request.POST.get('sold_quantity'))
+        sold_quantity = 0
         location = request.POST.get('location')
         current_condition = request.POST.get('current_condition')
 
