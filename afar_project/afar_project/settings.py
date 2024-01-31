@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'afar_app',
-    'dashboard',
-    'debug_toolbar',
-    'users'
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'afar_project.urls'
@@ -80,15 +77,8 @@ WSGI_APPLICATION = 'afar_project.wsgi.application'
 
 DATABASES = {
     'default': {
-            # 'ENGINE': 'django.db.backends.sqlite3',
-            # 'NAME': BASE_DIR / 'db.sqlite3',
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'DVST',
-            'USER': 'postgres',
-            'PASSWORD': 'frc123',
-            'HOST' : 'localhost',
-            'PORT' : '5432'
-            
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
     }
 }
 
@@ -127,7 +117,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
