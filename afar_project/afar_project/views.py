@@ -11,10 +11,7 @@ from datetime import datetime
 import re
 import os
 from django.conf import settings
-<<<<<<< HEAD
 from django.contrib import messages
-=======
->>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
 
 form_inputs = []
 
@@ -1587,7 +1584,6 @@ def frc_system(request):
         # Read the uploaded Excel file
         uploaded_df = pd.read_excel(uploaded_file)
 
-<<<<<<< HEAD
         if len(existing_df['Financial Year'])>len(uploaded_df['Financial Year']):
             file=existing_df
         
