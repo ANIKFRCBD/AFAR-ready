@@ -11,7 +11,10 @@ from datetime import datetime
 import re
 import os
 from django.conf import settings
+<<<<<<< HEAD
 from django.contrib import messages
+=======
+>>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
 
 form_inputs = []
 
@@ -1584,6 +1587,7 @@ def frc_system(request):
         # Read the uploaded Excel file
         uploaded_df = pd.read_excel(uploaded_file)
 
+<<<<<<< HEAD
         if len(existing_df['Financial Year'])>len(uploaded_df['Financial Year']):
             file=existing_df
         
@@ -1593,6 +1597,14 @@ def frc_system(request):
         file_path = 'csv_path/sample/asset_register.xlsx'
         file.to_excel(file_path, index=False)
         messages.info(request,f"your file {uploaded_file} has been uploaded")
+=======
+        # Concatenate DataFrames
+        concatenated_df = pd.concat([existing_df, uploaded_df], ignore_index=True)
+
+        # Write the concatenated DataFrame to a new Excel file
+        concatenated_file_path = 'csv_path/sample/asset_register.xlsx'
+        concatenated_df.to_excel(concatenated_file_path, index=False)
+>>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
 
     return render(request, 'frc_system')  # Render the original form if no file is uploaded or GET request
 

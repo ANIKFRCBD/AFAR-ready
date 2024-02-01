@@ -20,7 +20,10 @@ from afar_project.views import asset_register,data_entry,modify_database,success
 from dashboard.views import dashboard,dashboard_summary_of_assets
 from users.views import opening,signin,signup,SignUpModel
 import debug_toolbar
+<<<<<<< HEAD
 from impairmenttest import views as impairment
+=======
+>>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',opening,name='opening'),
@@ -56,5 +59,9 @@ urlpatterns = [
     path('frc_dep/', frc_dep, name='frc_dep'),
     path('frc_system/', frc_system, name='frc_system'),
     path('frc_data_entry/', frc_data_entry, name='frc_data_entry'),
+<<<<<<< HEAD
     path('impariment/', impairment.imparimenttest, name='impairment'),
+=======
+    
+>>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
 ]

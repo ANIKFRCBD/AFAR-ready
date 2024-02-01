@@ -72,7 +72,11 @@
       
     </div>
     <br><br><br>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
     <div class="col-md-9">
       <!-- Form to Add New Column -->
       <div class="add-column-form">
@@ -83,11 +87,14 @@
               <button type="submit" class="btn btn-success">Upload excel File</button>
             </form>
       </div>
+<<<<<<< HEAD
       <div class="messages">
         {% for i in messages %}
         <h5>{{ i }}</h5>
         {% endfor %}
       </div>
+=======
+>>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
       
     </div>
 
