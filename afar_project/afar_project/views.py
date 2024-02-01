@@ -1597,15 +1597,6 @@ def frc_system(request):
         file_path = 'csv_path/sample/asset_register.xlsx'
         file.to_excel(file_path, index=False)
         messages.info(request,f"your file {uploaded_file} has been uploaded")
-=======
-        # Concatenate DataFrames
-        concatenated_df = pd.concat([existing_df, uploaded_df], ignore_index=True)
-
-        # Write the concatenated DataFrame to a new Excel file
-        concatenated_file_path = 'csv_path/sample/asset_register.xlsx'
-        concatenated_df.to_excel(concatenated_file_path, index=False)
->>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
-
     return render(request, 'frc_system')  # Render the original form if no file is uploaded or GET request
 
 def extract_numeric(value):
