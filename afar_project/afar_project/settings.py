@@ -38,13 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'afar_app',
-<<<<<<< HEAD
     'dashboard',
     'users',
     'impairmenttest',
-=======
-    'dashboard'
->>>>>>> c66c41def6816c09e1eddc74a3d211422267f724
 ]
 
 MIDDLEWARE = [
